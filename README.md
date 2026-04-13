@@ -1,6 +1,6 @@
 # macOS Dotfiles
 
-Nix Flakes + nix-darwin + Home Manager を使った macOS 環境設定。
+Nix Flakes + Home Manager を使った macOS 環境設定。
 
 ## セットアップ
 
@@ -25,33 +25,26 @@ git clone git@github.com:Restoration/dotfiles-client-mac.git ~/.config/nix
 cd ~/.config/nix
 ```
 
-### 4. hostname と username の変更
+### 4. username の変更
 
 `flake.nix` の以下の箇所を自分の環境に合わせて変更する。
 
 ```nix
 let
   username = "develop";  # macOS のログインユーザー名
-  hostname = "develop";  # scutil --get LocalHostName で確認
 in
 ```
 
-hostname は以下のコマンドで確認できる。
+### 5. 初回設定反映
 
 ```bash
-scutil --get LocalHostName
-```
-
-### 5. nix-darwin の初回インストール
-
-```bash
-nix run nix-darwin -- switch --flake ~/.config/nix
+home-manager switch --flake ~/.config/nix
 ```
 
 ### 6. 以降の設定反映
 
 ```bash
-darwin-rebuild switch --flake ~/.config/nix
+home-manager switch --flake ~/.config/nix
 ```
 
 ## HHKB
