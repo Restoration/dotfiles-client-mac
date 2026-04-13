@@ -19,7 +19,7 @@
     let
       username = "develop";
       system = builtins.currentSystem;
-      supportedSystems = [ "aarch64-darwin" "x86_64-linux" ];
+      supportedSystems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
       mkFormatter =
         sys:
         (treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${sys} {

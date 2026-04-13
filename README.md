@@ -1,16 +1,22 @@
 # macOS / Linux Dotfiles
 
-Nix Flakes + Home Manager を使った macOS および Linux (Intel PC) 環境設定。
+Nix Flakes + Home Manager を使った macOS (Apple Silicon / Intel) および Linux (Intel PC) 環境設定。
 
 ## セットアップ
 
 ### 1. Nix のインストール
 
+Apple Silicon と Linux では以下のインストールコマンドが使えます。
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-この公式インストーラは Intel Mac / Apple Silicon の両方に対応しています。Intel Mac でも同じコマンドで実行できます。
+Intel Mac (x86_64-darwin) は上記の Determinate Systems インストーラでは未サポートです。その場合は公式インストーラを使ってください。
+
+```bash
+curl -L https://nixos.org/nix/install | sh
+```
 
 インストール後、ターミナルを再起動する。
 
