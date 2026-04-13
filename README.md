@@ -20,13 +20,7 @@ curl -L https://nixos.org/nix/install | sh
 
 インストール後、ターミナルを再起動する。
 
-### 2. Homebrew のインストール
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-### 3. リポジトリのクローン
+### 2. リポジトリのクローン
 
 ```bash
 git clone git@github.com:Restoration/dotfiles-client-mac.git ~/.config/nix
