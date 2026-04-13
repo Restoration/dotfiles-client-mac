@@ -1,6 +1,6 @@
-# macOS Dotfiles
+# macOS / Linux Dotfiles
 
-Nix Flakes + Home Manager を使った macOS 環境設定。
+Nix Flakes + Home Manager を使った macOS および Linux (Intel PC) 環境設定。
 
 ## セットアップ
 
@@ -9,6 +9,8 @@ Nix Flakes + Home Manager を使った macOS 環境設定。
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
+
+この公式インストーラは Intel Mac / Apple Silicon の両方に対応しています。Intel Mac でも同じコマンドで実行できます。
 
 インストール後、ターミナルを再起動する。
 
@@ -31,7 +33,7 @@ cd ~/.config/nix
 
 ```nix
 let
-  username = "develop";  # macOS のログインユーザー名
+  username = "develop";  # Linux / macOS のログインユーザー名
 in
 ```
 
