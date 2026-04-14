@@ -19,5 +19,7 @@ brew "biome"
 # Tag browser
 brew "universal-ctags"
 
-# Claude Code CLI
-brew "claude-code"
+# Lazy tools
+brew "lazygit"
+brew "lazydocker"
+brew "lazysql"
