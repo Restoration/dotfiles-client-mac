@@ -1,56 +1,162 @@
-# macOS / Linux Dotfiles
+# Neovim 設定
 
-Nix Flakes + Home Manager を使った macOS (Apple Silicon / Intel) および Linux (Intel PC) 環境設定。
+macOS / Linux 向け Neovim 設定ファイル。Lua で記述。
+
+## ディレクトリ構成
+
+```
+lua/
+├── init.lua              # 基本設定・キーマップ
+└── plugins/
+    ├── theme.lua         # カラースキーム (nord) + vim-airline
+    ├── tree.lua          # ファイルツリー (nvim-tree)
+    ├── lsp.lua           # LSP 設定 (nvim-lspconfig)
+    ├── cmp.lua           # 補完エンジン (nvim-cmp + LuaSnip)
+    ├── telescope.lua     # ファジーファインダー (telescope.nvim)
+    ├── tagbar.lua        # タグバー (tagbar)
+    ├── go.lua            # Go 開発 (vim-go)
+    ├── typescript.lua    # TypeScript 開発 (typescript-tools.nvim)
+    ├── lint.lua          # Linter (nvim-lint)
+    ├── format.lua        # フォーマッター (conform.nvim)
+    ├── trouble.lua       # 診断リスト (trouble.nvim)
+    └── claude.lua        # Claude Code 連携 (claudecode.nvim)
+```
 
 ## セットアップ
 
-### 1. Nix のインストール
-
-Apple Silicon と Linux では以下のインストールコマンドが使えます。
+### 1. 設定ファイルのクローン
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+git clone git@github.com:Restoration/dotfiles-client-mac.git ~/.config/nvim
+cd ~/.config/nvim
 ```
 
-Intel Mac (x86_64-darwin) は上記の Determinate Systems インストーラでは未サポートです。その場合は公式インストーラを使ってください。
+### 2. 依存パッケージのインストール (macOS)
+
+Homebrew がインストール済みであれば `brew bundle` で一括インストールできる。
 
 ```bash
-curl -L https://nixos.org/nix/install | sh
+brew bundle
 ```
 
-インストール後、ターミナルを再起動する。
+Brewfile に含まれるパッケージ:
 
-### 2. リポジトリのクローン
+| パッケージ | 用途 |
+|---|---|
+| neovim | エディタ本体 |
+| go | Go 開発環境 |
+| gopls | Go LSP サーバー |
+| gofumpt | Go フォーマッター |
+| delve | Go DAP デバッガー |
+| pyright | Python LSP サーバー |
+| black | Python フォーマッター |
+| ruff | Python Linter |
+| node | JavaScript / TypeScript ランタイム |
+| biome | JS / TS / JSON フォーマッター・Linter |
+| universal-ctags | タグバー用タグ生成 |
+| claude-code | Claude Code CLI |
+
+`brew bundle` 完了後、以下を追加で実行する。
 
 ```bash
-git clone git@github.com:Restoration/dotfiles-client-mac.git ~/.config/nix
-cd ~/.config/nix
+# goimports (Homebrew 未対応のため go install で導入)
+go install golang.org/x/tools/cmd/goimports@latest
 ```
 
-### 4. username の変更
-
-`flake.nix` の以下の箇所を自分の環境に合わせて変更する。
-
-```nix
-let
-  username = "develop";  # Linux / macOS のログインユーザー名
-in
-```
-
-### 5. 初回設定反映
+### 3. プラグインマネージャー (lazy.nvim) のインストール
 
 ```bash
-home-manager switch --flake ~/.config/nix
+git clone --filter=blob:none --branch=stable \
+  https://github.com/folke/lazy.nvim \
+  ~/.local/share/nvim/lazy/lazy.nvim
 ```
 
-### 6. 以降の設定反映
+### 4. Neovim を起動してプラグインをインストール
 
 ```bash
-home-manager switch --flake ~/.config/nix
+nvim
 ```
 
-## HHKB
+lazy.nvim が自動で全プラグインをインストールする。
 
-HHKB Professional の設定ファイルは `HHKB/` に格納。ドライバは以下からダウンロード。
+## 主なプラグイン
 
-https://happyhackingkb.com/jp/download/macdownload.html
+| カテゴリ | プラグイン |
+|---|---|
+| UI | nord-vim, vim-airline |
+| ファイルツリー | nvim-tree |
+| ファジーファインダー | telescope.nvim |
+| LSP | nvim-lspconfig (gopls, pyright) |
+| 補完 | nvim-cmp, LuaSnip |
+| フォーマット | conform.nvim |
+| Lint | nvim-lint |
+| Go | vim-go |
+| TypeScript | typescript-tools.nvim |
+| 診断 | trouble.nvim |
+| AI | claudecode.nvim |
+
+## キーマップ
+
+`<leader>` は `Space`。
+
+### 基本操作
+
+| キー | 動作 |
+|---|---|
+| `:tn` | 新しいタブ |
+| `:ex` | 終了 |
+| `:ps` | 水平分割 |
+| `:vs` | 垂直分割 |
+| `:te` | ターミナル |
+| `<Esc><Esc>` | 検索ハイライト消去 |
+
+### ファイルツリー
+
+| キー | 動作 |
+|---|---|
+| `:nt` | nvim-tree トグル |
+| `<leader>e` | nvim-tree フォーカス |
+
+### Telescope
+
+| キー | 動作 |
+|---|---|
+| `<leader>ff` | ファイル検索 |
+| `<leader>fg` | grep 検索 |
+| `<leader>fb` | バッファ一覧 |
+| `<leader>fh` | ヘルプタグ |
+| `<leader>fd` | 診断一覧 |
+
+### LSP
+
+| キー | 動作 |
+|---|---|
+| `gd` | 定義へジャンプ |
+| `gr` | 参照一覧 |
+| `K` | ホバー表示 |
+| `gi` | 実装へジャンプ |
+| `<C-k>` | シグネチャヘルプ |
+| `<leader>rn` | リネーム |
+| `<leader>ca` | コードアクション |
+| `<leader>f` | フォーマット |
+
+### Claude Code
+
+| キー | 動作 |
+|---|---|
+| `<leader>ac` | Claude トグル |
+| `<leader>af` | Claude フォーカス |
+| `<leader>ar` | セッション再開 |
+| `<leader>aC` | セッション継続 |
+| `<leader>ab` | 現在バッファを追加 |
+| `<leader>as` | 選択範囲を送信 / nvim-tree からファイル追加 |
+| `<leader>am` | モデル選択 |
+| `<leader>aS` | ステータス確認 |
+
+## フォーマッター対応言語
+
+| 言語 | ツール |
+|---|---|
+| Go | goimports, gofumpt |
+| JavaScript / TypeScript | biome |
+| Python | black |
