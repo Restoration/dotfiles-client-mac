@@ -11,6 +11,7 @@ brew "delve"
 brew "pyright"
 brew "black"
 brew "ruff"
+brew "pyenv"
 
 # JavaScript / TypeScript
 brew "node"
