@@ -25,6 +25,10 @@ brew "lazygit"
 brew "lazydocker"
 brew "lazysql"
 
+# CLI
+brew "yazi"
+brew "glow"
+
 # shell
 brew "zsh"
 
