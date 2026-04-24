@@ -24,3 +24,11 @@ brew "universal-ctags"
 brew "lazygit"
 brew "lazydocker"
 brew "lazysql"
+
+# shell
+brew "zsh"
+
+# docker
+# brew "docker-compose"
+brew "docker"
+
