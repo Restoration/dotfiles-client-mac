@@ -1,6 +1,6 @@
-# Neovim 設定
+# dotfiles (macOS)
 
-macOS / Linux 向け Neovim 設定ファイル。Lua で記述。
+macOS 向け開発環境の設定ファイル。Neovim 設定は Lua で記述。
 
 ## ディレクトリ構成
 
@@ -54,6 +54,13 @@ Brewfile に含まれるパッケージ:
 | node | JavaScript / TypeScript ランタイム |
 | biome | JS / TS / JSON フォーマッター・Linter |
 | universal-ctags | タグバー用タグ生成 |
+| lazygit | Git TUI クライアント |
+| lazydocker | Docker TUI クライアント |
+| lazysql | SQL TUI クライアント |
+| pyenv | Python バージョン管理 |
+| zsh | シェル |
+| docker | コンテナランタイム |
+| tmux | ターミナルマルチプレクサ |
 | claude-code | Claude Code CLI |
 
 `brew bundle` 完了後、以下を追加で実行する。
