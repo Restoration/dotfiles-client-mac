@@ -36,5 +36,5 @@ brew "zsh"
 # brew "docker-compose"
 brew "docker"
 
-# tmux
 brew "tmux"
+brew "cmux"
