@@ -8,5 +8,5 @@ require("nvim-tree").setup({
   filters  = { dotfiles = false },
 })
 
-vim.keymap.set("n", ":nt",       "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>nt", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>",  { noremap = true, silent = true })

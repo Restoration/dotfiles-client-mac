@@ -2,6 +2,8 @@
 
 macOS 向け開発環境の設定ファイル。Neovim 設定は Lua で記述。
 
+> **必要環境:** Neovim 0.11 以上（`vim.lsp.config` / `vim.lsp.enable` API を使用）
+
 ## ディレクトリ構成
 
 ```
@@ -49,7 +51,7 @@ Brewfile に含まれるパッケージ:
 
 | パッケージ | 用途 |
 |---|---|
-| neovim | エディタ本体 |
+| neovim | エディタ本体 (0.11+) |
 | go | Go 開発環境 |
 | gopls | Go LSP サーバー |
 | gofumpt | Go フォーマッター |
@@ -64,6 +66,8 @@ Brewfile に含まれるパッケージ:
 | lazydocker | Docker TUI クライアント |
 | lazysql | SQL TUI クライアント |
 | pyenv | Python バージョン管理 |
+| yazi | ターミナルファイルマネージャー |
+| glow | Markdown ターミナルレンダラー |
 | zsh | シェル |
 | docker | コンテナランタイム |
 | tmux | ターミナルマルチプレクサ |
@@ -116,18 +120,18 @@ lazy.nvim が自動で全プラグインをインストールする。
 
 | キー | 動作 |
 |---|---|
-| `:tn` | 新しいタブ |
-| `:ex` | 終了 |
-| `:ps` | 水平分割 |
-| `:vs` | 垂直分割 |
-| `:te` | ターミナル |
+| `<leader>tn` | 新しいタブ |
+| `<leader>ex` | 終了 |
+| `<leader>ps` | 水平分割 |
+| `<leader>vs` | 垂直分割 |
+| `<leader>te` | ターミナル |
 | `<Esc><Esc>` | 検索ハイライト消去 |
 
 ### ファイルツリー
 
 | キー | 動作 |
 |---|---|
-| `:nt` | nvim-tree トグル |
+| `<leader>nt` | nvim-tree トグル |
 | `<leader>e` | nvim-tree フォーカス |
 
 ### Telescope

@@ -26,11 +26,11 @@ opt.wrap         = true
 vim.g.mapleader = " "
 
 local map = vim.keymap.set
-map("n", ":tn",        "<cmd>tabnew<CR>",           { noremap = true })
-map("n", ":ex",        "<cmd>exit<CR>",              { noremap = true })
-map("n", ":ps",        "<cmd>split<CR>",             { noremap = true })
-map("n", ":vs",        "<cmd>vsplit<CR>",            { noremap = true })
-map("n", ":te",        "<cmd>terminal<CR>",          { noremap = true })
+map("n", "<leader>tn", "<cmd>tabnew<CR>",    { noremap = true })
+map("n", "<leader>ex", "<cmd>exit<CR>",     { noremap = true })
+map("n", "<leader>ps", "<cmd>split<CR>",    { noremap = true })
+map("n", "<leader>vs", "<cmd>vsplit<CR>",   { noremap = true })
+map("n", "<leader>te", "<cmd>terminal<CR>", { noremap = true })
 map("n", "<Esc><Esc>", "<cmd>nohlsearch<CR><Esc>",  { noremap = true, silent = true })
 map("n", "j",          "gj",                         { noremap = true })
 map("n", "k",          "gk",                         { noremap = true })

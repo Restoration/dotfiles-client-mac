@@ -2,11 +2,11 @@
 -- UI / テーマ (nord-vim + vim-airline)
 -- ---------------------------------------------------------------------------
 
-vim.cmd("colorscheme nord")
 vim.g.nord_italic = 1
 vim.g.nord_italic_comments = 1
 vim.g.nord_uniform_status_lines = 1
 vim.g.nord_uniform_diff_background = 1
+vim.cmd("colorscheme nord")
 
 -- 背景透過
 local transparent_groups = {

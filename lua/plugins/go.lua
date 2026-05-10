@@ -22,20 +22,14 @@ vim.keymap.set("n", "<leader>gr",  "<cmd>GoRun<CR>",        opts)
 vim.keymap.set("n", "<leader>gt",  "<cmd>GoTest<CR>",       opts)
 vim.keymap.set("n", "<leader>gtf", "<cmd>GoTestFunc<CR>",   opts)
 vim.keymap.set("n", "<leader>gb",  "<cmd>GoBuild<CR>",      opts)
-vim.keymap.set("n", "<leader>gi",  "<cmd>GoImpl<CR>",       opts)
+vim.keymap.set("n", "<leader>gI",  "<cmd>GoImpl<CR>",       opts)
 vim.keymap.set("n", "<leader>gfs", "<cmd>GoFillStruct<CR>", opts)
 vim.keymap.set("n", "<leader>gat", "<cmd>GoAddTag<CR>",     opts)
 vim.keymap.set("n", "<leader>grt", "<cmd>GoRmTag<CR>",      opts)
 vim.keymap.set("n", "<leader>ga",  "<cmd>GoAlt<CR>",        opts)
 vim.keymap.set("n", "<leader>gc",  "<cmd>GoCoverage<CR>",   opts)
 
--- 保存時に goimports 自動実行
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern  = "*.go",
-  callback = function()
-    require("go.format").goimports()
-  end,
-})
+-- 保存時フォーマットは conform.nvim (format.lua) に統一
 
 -- ---------------------------------------------------------------------------
 -- nvim-dap (デバッガ基盤)
