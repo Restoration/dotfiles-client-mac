@@ -29,6 +29,7 @@ brew "lazysql"
 brew "yazi"
 brew "glow"
 brew "claude-code"
+brew "awscli"
 
 # shell
 brew "zsh"
