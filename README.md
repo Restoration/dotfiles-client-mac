@@ -33,21 +33,59 @@ git clone git@github.com:Restoration/dotfiles-client-mac.git ~/.config/nvim
 cd ~/.config/nvim
 ```
 
-### 2. 依存パッケージのインストール (macOS)
+### 2. セットアップスクリプトの実行 (推奨)
 
-Homebrew がインストール済みであれば `brew bundle` で一括インストールできる。
+macOS / Debian・Ubuntu / WSL2 に対応した一括セットアップスクリプトを用意している。OS を自動検出して、必要なパッケージ・言語ツール・lazy.nvim をまとめて導入する。
+
+```bash
+./setup.sh
+```
+
+オプション:
+
+| オプション | 動作 |
+|---|---|
+| `--no-lang` | 言語ツール (Go / Python / Node) のインストールをスキップ |
+| `--help`    | ヘルプを表示 |
+
+スクリプトが行う処理:
+
+- OS を自動検出 (macOS / Debian 系)
+- macOS: `brew bundle` で Brewfile のパッケージを導入
+- Debian 系: `apt` で基本パッケージ + Neovim 0.11+ (PPA から)
+- 言語ツール: `gopls` / `gofumpt` / `goimports` / `delve` / `pyright` / `black` / `ruff` / `biome`
+- `lazy.nvim` を `~/.local/share/nvim/lazy/lazy.nvim` にクローン
+
+既にインストール済みのものは自動的にスキップされる (冪等)。
+
+### 手動セットアップ (macOS)
+
+スクリプトを使わない場合は以下を順に実行する。
 
 ```bash
 brew bundle
+go install golang.org/x/tools/cmd/goimports@latest
+```
+
+### 3. Neovim を起動してプラグインをインストール
+
+```bash
+nvim
+```
+
+lazy.nvim が自動で全プラグインをインストールする。ヘッドレスで一括取得したい場合は以下も使える。
+
+```bash
+nvim --headless '+Lazy! sync' +qa
 ```
 
 ### Windows での利用 (WSL2)
 
-Windows でこの設定を使いたい場合は、まず WSL2 上に Linux 環境を構築してから利用することをおすすめします。WSL2 内で Neovim と必要なパッケージをインストールし、リポジトリを `~/.config/nvim` にクローンしてから `nvim` を起動してください。
+Windows でこの設定を使いたい場合は、まず WSL2 上に Linux 環境 (Ubuntu 推奨) を構築してから利用すること。WSL2 内で上記の `./setup.sh` を実行すれば、Neovim 本体・依存ツール・lazy.nvim まで一括でセットアップできる。
 
-このリポジトリは macOS 向けの設定を想定しているため、Windows ネイティブ環境よりも WSL2 上での利用のほうが安定して動作しやすいです。
+このリポジトリは macOS 向けの設定を想定しているため、Windows ネイティブ環境よりも WSL2 上での利用のほうが安定して動作しやすい。
 
-Brewfile に含まれるパッケージ:
+### Brewfile に含まれるパッケージ (macOS)
 
 | パッケージ | 用途 |
 |---|---|
@@ -72,29 +110,6 @@ Brewfile に含まれるパッケージ:
 | docker | コンテナランタイム |
 | tmux | ターミナルマルチプレクサ |
 | claude-code | Claude Code CLI |
-
-`brew bundle` 完了後、以下を追加で実行する。
-
-```bash
-# goimports (Homebrew 未対応のため go install で導入)
-go install golang.org/x/tools/cmd/goimports@latest
-```
-
-### 3. プラグインマネージャー (lazy.nvim) のインストール
-
-```bash
-git clone --filter=blob:none --branch=stable \
-  https://github.com/folke/lazy.nvim \
-  ~/.local/share/nvim/lazy/lazy.nvim
-```
-
-### 4. Neovim を起動してプラグインをインストール
-
-```bash
-nvim
-```
-
-lazy.nvim が自動で全プラグインをインストールする。
 
 ## 主なプラグイン
 
